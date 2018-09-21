@@ -7,10 +7,6 @@ RUN find / -xdev -type f -perm /u+s -exec chmod --changes u-s {} \; \
 #   [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
 RUN apk add libc6-compat
 
-COPY ./entrypoint.sh /
-RUN chmod a=rx /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-
 RUN wget -O- https://dist.ipfs.io/go-ipfs/v0.4.17/go-ipfs_v0.4.17_linux-amd64.tar.gz \
         | tar -xz -C /tmp \
     && mv /tmp/go-ipfs/ipfs /usr/local/bin \
@@ -19,4 +15,4 @@ RUN wget -O- https://dist.ipfs.io/go-ipfs/v0.4.17/go-ipfs_v0.4.17_linux-amd64.ta
 RUN adduser -S ipfs
 USER ipfs
 EXPOSE 4001/tcp
-CMD ["ipfs", "daemon"]
+CMD ["ipfs", "daemon", "--init", "--init-profile", "server"]
