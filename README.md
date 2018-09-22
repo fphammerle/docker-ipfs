@@ -9,3 +9,7 @@ sudo docker run --detach \
     --name ipfs \
     fphammerle/ipfs:0.4.17-amd64
 ```
+
+```sh
+xsel -b | sudo docker exec -i ipfs ipfs-add
+```
