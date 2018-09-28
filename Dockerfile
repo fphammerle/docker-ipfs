@@ -16,7 +16,9 @@ VOLUME $IPFS_PATH
 COPY ./ipfs-add /usr/local/bin
 RUN chmod a+rx /usr/local/bin/ipfs-add
 
-RUN wget -O- https://dist.ipfs.io/go-ipfs/v0.4.17/go-ipfs_v0.4.17_linux-amd64.tar.gz \
+ENV IPFS_VERSION 0.4.17
+ENV IPFS_ARCH arm
+RUN wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSION}_linux-${IPFS_ARCH}.tar.gz \
         | tar -xz -C /tmp \
     && mv /tmp/go-ipfs/ipfs /usr/local/bin \
     && rm -r /tmp/go-ipfs
