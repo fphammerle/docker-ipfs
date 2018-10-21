@@ -28,4 +28,5 @@ RUN wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSI
 
 USER ipfs
 EXPOSE 4001/tcp
-CMD ["ipfs", "daemon", "--init", "--init-profile", "server"]
+ENV IPFS_INIT_PROFILE server
+CMD ["ipfs", "daemon", "--init", "--init-profile", "$IPFS_INIT_PROFILE"]
