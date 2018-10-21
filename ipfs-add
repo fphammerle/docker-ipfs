@@ -1,8 +1,0 @@
-#!/bin/sh
-
-set -e
-
-p="$(mktemp)"
-cat >"$p"
-ipfs add "$p" | sed 's#^added #added https://ipfs.io/ipfs/#'
-rm "$p"

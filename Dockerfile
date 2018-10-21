@@ -16,9 +16,6 @@ ENV IPFS_PATH /ipfs-repo
 RUN mkdir -m u=rwx,g=,o= $IPFS_PATH && chown ipfs $IPFS_PATH
 VOLUME $IPFS_PATH
 
-COPY ./ipfs-add /usr/local/bin
-RUN chmod a+rx /usr/local/bin/ipfs-add
-
 ENV IPFS_VERSION 0.4.17
 ENV IPFS_ARCH amd64
 RUN wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSION}_linux-${IPFS_ARCH}.tar.gz \
