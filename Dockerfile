@@ -23,12 +23,13 @@ RUN wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSI
     && mv /tmp/go-ipfs/ipfs /usr/local/bin \
     && rm -r /tmp/go-ipfs
 
-COPY ./ipfs-daemon /usr/local/bin/ipfs-daemon
-RUN chmod a=rx /usr/local/bin/ipfs-daemon
+ENV IPFS_INIT_PROFILE server
+COPY entrypoint.sh /
+RUN chmod a=rx /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 USER ipfs
 EXPOSE 4001/tcp
 # ipfs http gateway
 EXPOSE 8080/tcp
-ENV IPFS_INIT_PROFILE server
-CMD ["ipfs-daemon"]
+CMD ["ipfs", "daemon"]
