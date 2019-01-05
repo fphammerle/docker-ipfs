@@ -24,6 +24,7 @@ RUN wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSI
     && rm -r /tmp/go-ipfs
 
 ENV IPFS_INIT_PROFILE server
+ENV IPFS_BOOTSTRAP_ADD ""
 COPY entrypoint.sh /
 RUN chmod a=rx /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
