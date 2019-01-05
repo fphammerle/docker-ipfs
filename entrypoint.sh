@@ -15,7 +15,11 @@ if [ "$IPFS_SWARM_ADDRS" != "default" ]; then
 fi
 
 if [ ! -z "$IPFS_BOOTSTRAP_ADD" ]; then
-    (set -x; ipfs bootstrap add -- $IPFS_BOOTSTRAP_ADD)
+    # + ipfs bootstrap add -- /dnsaddr/...
+    # Error: api not running
+    tmp=$(mktemp)
+    (set -x; jq '.Bootstrap |= (. + $ARGS.positional | unique)' --args $IPFS_BOOTSTRAP_ADD <"$IPFS_CONFIG_PATH" >$tmp)
+    mv $tmp "$IPFS_CONFIG_PATH"
 fi
 
 (set -x; exec "$@")
