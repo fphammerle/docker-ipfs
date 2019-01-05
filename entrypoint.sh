@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ ! -e "$IPFS_PATH/config" ]; then
-    (set -x; ipfs init --profile $IPFS_INIT_PROFILE)
+    (set -x; ipfs init --empty-repo --profile $IPFS_INIT_PROFILE)
 fi
 
 if [ "$IPFS_SWARM_ADDRS" != "default" ]; then
