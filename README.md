@@ -6,13 +6,11 @@ docker hub: https://hub.docker.com/r/fphammerle/ipfs/
 
 ipfs config guide: https://docs.ipfs.io/guides/examples/config/
 
-## example: short
-
 ```sh
 docker run --name ipfs fphammerle/ipfs
 ```
 
-## example: restart automatically
+## restart automatically
 
 ```sh
 docker run --name ipfs \
@@ -21,7 +19,23 @@ docker run --name ipfs \
     fphammerle/ipfs:latest
 ```
 
-## example: add bootstrap peers
+## change swarm listening addresses
+
+```sh
+docker run --name ipfs \
+    --env IPFS_SWARM_ADDRS="/ip4/0.0.0.0/tcp/4021 /ip6/::/tcp/4021" \
+    fphammerle/ipfs:latest
+```
+
+## disable swarm listener
+
+```sh
+docker run --name ipfs \
+    --env IPFS_SWARM_ADDRS="" \
+    fphammerle/ipfs:latest
+```
+
+## add bootstrap peers
 
 ```sh
 docker run --name ipfs \

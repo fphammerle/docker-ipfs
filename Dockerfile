@@ -3,7 +3,7 @@ FROM alpine:3.8
 RUN find / -xdev -type f -perm /u+s -exec chmod --changes u-s {} \; \
     && find / -xdev -type f -perm /g+s -exec chmod --changes g-s {} \;
 
-RUN apk add tini
+RUN apk add tini jq
 
 # $ readelf -l /tmp/go-ipfs/ipfs | grep 'program interpreter'
 #   [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
@@ -23,6 +23,7 @@ RUN wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSI
     && rm -r /tmp/go-ipfs
 
 ENV IPFS_INIT_PROFILE server
+ENV IPFS_SWARM_ADDRS "/ip4/0.0.0.0/tcp/4001"
 ENV IPFS_BOOTSTRAP_ADD ""
 COPY entrypoint.sh /
 RUN chmod a=rx /entrypoint.sh
