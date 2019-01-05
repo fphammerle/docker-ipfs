@@ -4,7 +4,6 @@ RUN find / -xdev -type f -perm /u+s -exec chmod --changes u-s {} \; \
     && find / -xdev -type f -perm /g+s -exec chmod --changes g-s {} \;
 
 RUN apk add tini
-ENTRYPOINT ["/sbin/tini", "-s", "--"]
 
 # $ readelf -l /tmp/go-ipfs/ipfs | grep 'program interpreter'
 #   [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
@@ -27,7 +26,7 @@ ENV IPFS_INIT_PROFILE server
 ENV IPFS_BOOTSTRAP_ADD ""
 COPY entrypoint.sh /
 RUN chmod a=rx /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "/entrypoint.sh"]
 
 USER ipfs
 EXPOSE 4001/tcp
