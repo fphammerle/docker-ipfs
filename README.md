@@ -21,7 +21,7 @@ docker run --name ipfs \
     fphammerle/ipfs:latest
 ```
 
-## change swarm listening addresses
+## change swarm listener ports
 
 ```sh
 docker run --name ipfs \
