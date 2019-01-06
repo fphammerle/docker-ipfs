@@ -16,8 +16,8 @@ RUN mkdir -m u=rwx,g=,o= $IPFS_PATH && chown ipfs $IPFS_PATH
 VOLUME $IPFS_PATH
 
 ENV IPFS_VERSION 0.4.18
-ENV IPFS_ARCH amd64
-RUN wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSION}_linux-${IPFS_ARCH}.tar.gz \
+COPY ipfs-arch.sh /
+RUN wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSION}_linux-$(/ipfs-arch.sh).tar.gz \
         | tar -xz -C /tmp \
     && mv /tmp/go-ipfs/ipfs /usr/local/bin \
     && rm -r /tmp/go-ipfs
