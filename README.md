@@ -6,7 +6,9 @@ container repo: https://git.hammerle.me/fphammerle/docker-ipfs
 
 docker hub: https://hub.docker.com/r/fphammerle/ipfs/
 
-ipfs config guide: https://docs.ipfs.io/guides/examples/config/
+ipfs config:
+[guide](https://docs.ipfs.io/guides/examples/config/) &
+[docs](https://github.com/ipfs/go-ipfs/blob/master/docs/config.md)
 
 ```sh
 docker run --name ipfs fphammerle/ipfs
