@@ -2,8 +2,6 @@
 
 golang-implementation of the [interplanetary file system (ipfs)](https://ipfs.io/) daemon
 
-container repo: https://git.hammerle.me/fphammerle/docker-ipfs
-
 docker hub: https://hub.docker.com/r/fphammerle/ipfs/
 
 ipfs config:
