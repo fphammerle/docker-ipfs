@@ -11,6 +11,7 @@ services:
     - ipfs_repo:/ipfs-repo:rw
     ports:
     - '4001:4001'
+    - '127.0.0.1:5001:5001'
     security_opt: ['no-new-privileges']
     restart: unless-stopped
 

@@ -22,15 +22,19 @@ RUN wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSI
     && mv /tmp/go-ipfs/ipfs /usr/local/bin \
     && rm -r /tmp/go-ipfs
 
-ENV IPFS_INIT_PROFILE server
-ENV IPFS_SWARM_ADDRS "/ip4/0.0.0.0/tcp/4001"
-ENV IPFS_BOOTSTRAP_ADD ""
+ENV IPFS_INIT_PROFILE=server \
+    IPFS_API_ADDR=/ip4/0.0.0.0/tcp/5001 \
+    IPFS_SWARM_ADDRS=/ip4/0.0.0.0/tcp/4001 \
+    IPFS_BOOTSTRAP_ADD=
 COPY entrypoint.sh /
 RUN chmod a=rx /entrypoint.sh
 ENTRYPOINT ["/sbin/tini", "--", "/entrypoint.sh"]
 
 USER ipfs
+# swarm
 EXPOSE 4001/tcp
-# ipfs http gateway
+# api & webgui
+EXPOSE 5001/tcp
+# http gateway
 EXPOSE 8080/tcp
 CMD ["ipfs", "daemon"]
