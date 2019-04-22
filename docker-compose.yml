@@ -1,0 +1,17 @@
+version: '2'
+
+volumes:
+  ipfs_repo:
+
+services:
+  ipfs:
+    build: .
+    image: fphammerle/ipfs
+    volumes:
+    - ipfs_repo:/ipfs-repo:rw
+    ports:
+    - '4001:4001'
+    security_opt: ['no-new-privileges']
+    restart: unless-stopped
+
+# https://docs.docker.com/compose/compose-file/compose-file-v2/

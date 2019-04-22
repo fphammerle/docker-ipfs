@@ -12,6 +12,12 @@ ipfs config:
 docker run --name ipfs fphammerle/ipfs
 ```
 
+or after cloning the repository:
+
+```sh
+docker-compose up
+```
+
 ## restart automatically
 
 ```sh
