@@ -1,7 +1,5 @@
 #!/bin/sh
 
-export IPFS_CONFIG_PATH="$IPFS_PATH/config"
-
 function ipfs_config_jq_edit {
     tmp=$(mktemp)
     (set -x; jq "$@" < "$IPFS_CONFIG_PATH" > "$tmp")
