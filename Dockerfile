@@ -15,7 +15,7 @@ ENV IPFS_PATH /ipfs-repo
 RUN mkdir -m u=rwx,g=,o= $IPFS_PATH && chown ipfs $IPFS_PATH
 VOLUME $IPFS_PATH
 
-ENV IPFS_VERSION 0.4.20
+ARG IPFS_VERSION=0.4.21
 COPY ipfs-arch.sh /
 RUN wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSION}_linux-$(/ipfs-arch.sh).tar.gz \
         | tar -xz -C /tmp \
