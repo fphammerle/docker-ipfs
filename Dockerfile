@@ -1,15 +1,18 @@
 FROM alpine:3.11
 
-RUN find / -xdev -type f -perm /u+s -exec chmod --changes u-s {} \; \
-    && find / -xdev -type f -perm /g+s -exec chmod --changes g-s {} \;
-
-RUN apk add tini jq
-
+ARG JQ_PACKAGE_VERSION=1.6-r0
+# libc6-compat required due to:
 # $ readelf -l /tmp/go-ipfs/ipfs | grep 'program interpreter'
 #   [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
-RUN apk add libc6-compat
-
-RUN adduser -S ipfs
+ARG LIBC6_COMPAT_PACKAGE_VERSION=1.1.24-r0
+ARG TINI_PACKAGE_VERSION=0.18.0-r0
+RUN find / -xdev -type f -perm /u+s -exec chmod --changes u-s {} \; \
+    && find / -xdev -type f -perm /g+s -exec chmod --changes g-s {} \; \
+    && apk add --no-cache \
+        jq=$JQ_PACKAGE_VERSION \
+        libc6-compat=$LIBC6_COMPAT_PACKAGE_VERSION \
+        tini=$TINI_PACKAGE_VERSION \
+    && adduser -S ipfs
 
 ENV IPFS_PATH /ipfs-repo
 RUN mkdir -m u=rwx,g=,o= $IPFS_PATH && chown ipfs $IPFS_PATH
