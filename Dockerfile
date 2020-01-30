@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.11
 
 RUN find / -xdev -type f -perm /u+s -exec chmod --changes u-s {} \; \
     && find / -xdev -type f -perm /g+s -exec chmod --changes g-s {} \;
