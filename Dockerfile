@@ -1,27 +1,34 @@
-FROM alpine:3.12
+# on alpine with libc6-compat=1.1.24-r9:
+# > Error relocating /usr/local/bin/ipfs: __fprintf_chk: symbol not found
+# > Error relocating /usr/local/bin/ipfs: __vfprintf_chk: symbol not found
+FROM debian:buster-slim
 
-ARG JQ_PACKAGE_VERSION=1.6-r1
-# libc6-compat required due to:
-# $ readelf -l /tmp/go-ipfs/ipfs | grep 'program interpreter'
-#   [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
-ARG LIBC6_COMPAT_PACKAGE_VERSION=1.1.24-r9
-ARG TINI_PACKAGE_VERSION=0.19.0-r0
-RUN find / -xdev -type f -perm /u+s -exec chmod --changes u-s {} \; \
-    && find / -xdev -type f -perm /g+s -exec chmod --changes g-s {} \; \
-    && apk add --no-cache \
-        jq=$JQ_PACKAGE_VERSION \
-        libc6-compat=$LIBC6_COMPAT_PACKAGE_VERSION \
-        tini=$TINI_PACKAGE_VERSION \
-    && adduser -S ipfs
-
+ARG JQ_PACKAGE_VERSION=1.5+dfsg-2+b1
+ARG TINI_PACKAGE_VERSION=0.18.0-1
 ENV IPFS_PATH /ipfs-repo
-RUN mkdir -m u=rwx,g=,o= $IPFS_PATH && chown ipfs $IPFS_PATH
+RUN apt-get update \
+    && apt-get install --no-install-recommends --yes \
+        jq=$JQ_PACKAGE_VERSION \
+        tini=$TINI_PACKAGE_VERSION \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists \
+    && find / -xdev -type f -perm /u+s -exec chmod --changes u-s {} \; \
+    && find / -xdev -type f -perm /g+s -exec chmod --changes g-s {} \; \
+    && useradd --system ipfs \
+    && mkdir --mode u=rwx,g=,o= $IPFS_PATH \
+    && chown ipfs $IPFS_PATH
 VOLUME $IPFS_PATH
 
-ARG IPFS_VERSION=0.5.0
+ARG IPFS_VERSION=0.7.0
 COPY ipfs-arch.sh /
-RUN wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSION}_linux-$(/ipfs-arch.sh).tar.gz \
+ARG INSTALL_DEPENDENCIES="wget ca-certificates"
+RUN apt-get update \
+    && apt-get install --no-install-recommends --yes $INSTALL_DEPENDENCIES \
+    && wget -O- https://dist.ipfs.io/go-ipfs/v${IPFS_VERSION}/go-ipfs_v${IPFS_VERSION}_linux-$(/ipfs-arch.sh).tar.gz \
         | tar -xz -C /tmp \
+    && apt-get purge --yes --autoremove $INSTALL_DEPENDENCIES \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists \
     && mv /tmp/go-ipfs/ipfs /usr/local/bin \
     && rm -r /tmp/go-ipfs
 
@@ -32,7 +39,7 @@ ENV IPFS_CONFIG_PATH="${IPFS_PATH}/config" \
     IPFS_BOOTSTRAP_ADD=
 COPY entrypoint.sh /
 RUN chmod a=rx /entrypoint.sh
-ENTRYPOINT ["/sbin/tini", "--", "/entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
 
 USER ipfs
 # swarm
