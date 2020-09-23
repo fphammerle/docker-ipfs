@@ -1,11 +1,11 @@
-FROM alpine:3.11
+FROM alpine:3.12
 
-ARG JQ_PACKAGE_VERSION=1.6-r0
+ARG JQ_PACKAGE_VERSION=1.6-r1
 # libc6-compat required due to:
 # $ readelf -l /tmp/go-ipfs/ipfs | grep 'program interpreter'
 #   [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
-ARG LIBC6_COMPAT_PACKAGE_VERSION=1.1.24-r2
-ARG TINI_PACKAGE_VERSION=0.18.0-r0
+ARG LIBC6_COMPAT_PACKAGE_VERSION=1.1.24-r9
+ARG TINI_PACKAGE_VERSION=0.19.0-r0
 RUN find / -xdev -type f -perm /u+s -exec chmod --changes u-s {} \; \
     && find / -xdev -type f -perm /g+s -exec chmod --changes g-s {} \; \
     && apk add --no-cache \
