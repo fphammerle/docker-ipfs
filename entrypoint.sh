@@ -11,7 +11,11 @@ ipfs_config_jq_edit() {
 # https://github.com/stedolan/jq/commit/66fb962a6608805f4d7667d39ad0d88158bd1262
 # compare fphammerle/docker-ipfs v0.2.0
 args_to_json_array() {
-    printf '%s\n' "$@" | jq -R . | jq -sc .
+    if [ -z "$@" ]; then
+        printf '[]\n'
+    else
+        printf '%s\n' "$@" | jq -R . | jq -sc .
+    fi
 }
 
 if [ ! -e "$IPFS_CONFIG_PATH" ]; then
