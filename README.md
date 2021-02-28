@@ -20,7 +20,7 @@ or after cloning the repository:
 docker-compose up
 ```
 
-## restart automatically
+## Restart Automatically
 
 ```sh
 docker run --name ipfs \
@@ -29,7 +29,7 @@ docker run --name ipfs \
     fphammerle/ipfs:latest
 ```
 
-## change swarm listener ports
+## Change Swarm Listener Ports
 
 ```sh
 docker run --name ipfs \
@@ -37,7 +37,7 @@ docker run --name ipfs \
     fphammerle/ipfs:latest
 ```
 
-## disable swarm listener
+## Disable Swarm Listener
 
 ```sh
 docker run --name ipfs \
@@ -45,7 +45,7 @@ docker run --name ipfs \
     fphammerle/ipfs:latest
 ```
 
-## add bootstrap peers
+## Add Bootstrap Nodes / Peers
 
 ```sh
 docker run --name ipfs \
@@ -53,13 +53,13 @@ docker run --name ipfs \
     fphammerle/ipfs:latest
 ```
 
-## disable api access from host
+## Disable API Access From Host
 
 ```sh
 docker run -e IPFS_API_ADDR=/ip4/127.0.0.1/tcp/5001 …
 ```
 
-## publish clipboard
+## Publish Clipboard
 
 ```sh
 xsel -b | sudo docker exec -i ipfs ipfs add -
