@@ -53,6 +53,12 @@ docker run --name ipfs \
     fphammerle/ipfs:latest
 ```
 
+## disable api access from host
+
+```sh
+docker run -e IPFS_API_ADDR=/ip4/127.0.0.1/tcp/5001 …
+```
+
 ## publish clipboard
 
 ```sh
