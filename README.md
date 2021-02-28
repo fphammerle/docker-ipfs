@@ -32,25 +32,19 @@ docker run --name ipfs \
 ## Change Swarm Listener Ports
 
 ```sh
-docker run --name ipfs \
-    --env IPFS_SWARM_ADDRS="/ip4/0.0.0.0/tcp/4021 /ip6/::/tcp/4021" \
-    fphammerle/ipfs:latest
+docker run -e IPFS_SWARM_ADDRS="/ip4/0.0.0.0/tcp/4021 /ip6/::/tcp/4021" …
 ```
 
 ## Disable Swarm Listener
 
 ```sh
-docker run --name ipfs \
-    --env IPFS_SWARM_ADDRS="" \
-    fphammerle/ipfs:latest
+docker run -e IPFS_SWARM_ADDRS="" …
 ```
 
 ## Add Bootstrap Nodes / Peers
 
 ```sh
-docker run --name ipfs \
-    --env IPFS_BOOTSTRAP_ADD='/dnsaddr/ipfs1.net/tcp/4001/QmPeerId /dnsaddr/ipfs2.net/tcp/4001/QmPeerId' \
-    fphammerle/ipfs:latest
+docker run -e IPFS_BOOTSTRAP_ADD='/dnsaddr/ipfs1.net/tcp/4001/QmPeerId /dnsaddr/ipfs2.net/tcp/4001/QmPeerId' …
 ```
 
 ## Disable API Access From Host
