@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- docker-compose: use custom container name "ipfs" instead of auto-generated "\[PROJECT_NAME\]_ipfs_1"
+- docker-compose: use custom container name "ipfs" instead of auto-generated "\[PROJECT_NAME\]\_ipfs\_1"
+- docker-compose: read-only root filesystem
 - docker-compose: drop capabilities
 
 ## [0.2.2] - 2020-09-24

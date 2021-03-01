@@ -1,4 +1,4 @@
-version: '2'
+version: '2.3'
 
 volumes:
   ipfs_repo:
@@ -8,8 +8,18 @@ services:
     build: .
     image: docker.io/fphammerle/ipfs
     container_name: ipfs
+    read_only: true
     volumes:
-    - ipfs_repo:/ipfs-repo:rw
+    - type: volume
+      source: ipfs_repo
+      target: /ipfs-repo
+      read_only: no
+    - type: tmpfs
+      target: /tmp # entrypoint.sh
+      tmpfs:
+        # nosuid,nodev,noexec added by default
+        mode: '1777'
+        size: 16k # default config has approx 5kB
     ports:
     - '4001:4001'
     - '127.0.0.1:5001:5001'

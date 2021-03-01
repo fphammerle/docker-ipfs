@@ -1,6 +1,8 @@
 #!/bin/sh
 set -eu
 
+# "sponge" also writes to /tmp
+# https://salsa.debian.org/nsc/moreutils/-/blob/debian/0.62-1/sponge.c#L262
 ipfs_config_jq_edit() {
     tmp=$(mktemp)
     (set -x; jq "$@" < "$IPFS_CONFIG_PATH" > "$tmp")
