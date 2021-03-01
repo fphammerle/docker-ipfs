@@ -30,7 +30,9 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists \
     && mv /tmp/go-ipfs/ipfs /usr/local/bin \
-    && rm -r /tmp/go-ipfs
+    && rm -r /tmp/go-ipfs \
+    && find / -xdev -type f -perm /u+s -exec chmod --changes u-s {} \; \
+    && find / -xdev -type f -perm /g+s -exec chmod --changes g-s {} \;
 
 ENV IPFS_CONFIG_PATH="${IPFS_PATH}/config" \
     IPFS_INIT_PROFILE=server \
