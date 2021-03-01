@@ -51,3 +51,9 @@ EXPOSE 5001/tcp
 # http gateway
 EXPOSE 8080/tcp
 CMD ["ipfs", "daemon"]
+
+# https://github.com/opencontainers/image-spec/blob/v1.0.1/annotations.md
+ARG REVISION=
+LABEL org.opencontainers.image.title="go-ipfs" \
+    org.opencontainers.image.source="https://github.com/fphammerle/docker-ipfs" \
+    org.opencontainers.image.revision="$REVISION"
