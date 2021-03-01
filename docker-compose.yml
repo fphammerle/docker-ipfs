@@ -6,13 +6,14 @@ volumes:
 services:
   ipfs:
     build: .
-    image: fphammerle/ipfs
+    image: docker.io/fphammerle/ipfs
+    container_name: ipfs
     volumes:
     - ipfs_repo:/ipfs-repo:rw
     ports:
     - '4001:4001'
     - '127.0.0.1:5001:5001'
-    security_opt: ['no-new-privileges']
+    security_opt: [no-new-privileges]
     restart: unless-stopped
 
 # https://docs.docker.com/compose/compose-file/compose-file-v2/
