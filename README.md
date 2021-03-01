@@ -29,7 +29,7 @@ docker run --name ipfs \
     fphammerle/ipfs:latest
 ```
 
-## Change Swarm Listener Ports
+## Change [Swarm Listener Ports](https://github.com/ipfs/go-ipfs/blob/v0.8.0/docs/config.md#addressesswarm)
 
 ```sh
 docker run -e IPFS_SWARM_ADDRS="/ip4/0.0.0.0/tcp/4021 /ip6/::/tcp/4021" …
@@ -41,7 +41,7 @@ docker run -e IPFS_SWARM_ADDRS="/ip4/0.0.0.0/tcp/4021 /ip6/::/tcp/4021" …
 docker run -e IPFS_SWARM_ADDRS="" …
 ```
 
-## Add Bootstrap Nodes / Peers
+## Add [Bootstrap Nodes / Peers](https://github.com/ipfs/go-ipfs/blob/v0.8.0/docs/config.md#bootstrap)
 
 ```sh
 docker run -e IPFS_BOOTSTRAP_ADD='/dnsaddr/ipfs1.net/tcp/4001/QmPeerId /dnsaddr/ipfs2.net/tcp/4001/QmPeerId' …
