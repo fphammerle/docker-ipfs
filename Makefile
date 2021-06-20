@@ -1,7 +1,7 @@
 # sync with https://github.com/fphammerle/docker-onion-service/blob/master/Makefile
 
 IMAGE_NAME = docker.io/fphammerle/ipfs
-PROJECT_VERSION = $(shell git describe --match=0.* --abbrev=0 --dirty | sed -e 's/^v//')
+PROJECT_VERSION = $(shell git describe --match=1.* --abbrev=0 --dirty | sed -e 's/^v//')
 IPFS_VERSION = $(shell grep -Po 'IPFS_VERSION=\K.+' Dockerfile)
 ARCH = $(shell arch)
 # architecture[arm_variant]
