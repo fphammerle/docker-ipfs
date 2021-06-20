@@ -1,7 +1,7 @@
 # on alpine with libc6-compat=1.1.24-r9:
 # > Error relocating /usr/local/bin/ipfs: __fprintf_chk: symbol not found
 # > Error relocating /usr/local/bin/ipfs: __vfprintf_chk: symbol not found
-FROM debian:10.8-slim
+FROM debian:10.9-slim
 
 ARG JQ_PACKAGE_VERSION=1.5+dfsg-2+b1
 ARG TINI_PACKAGE_VERSION=0.18.0-1
