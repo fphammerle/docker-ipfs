@@ -1,10 +1,10 @@
 # on alpine with libc6-compat=1.1.24-r9:
 # > Error relocating /usr/local/bin/ipfs: __fprintf_chk: symbol not found
 # > Error relocating /usr/local/bin/ipfs: __vfprintf_chk: symbol not found
-FROM debian:10.10-slim
+FROM debian:11.0-slim
 
-ARG JQ_PACKAGE_VERSION=1.5+dfsg-2+b1
-ARG TINI_PACKAGE_VERSION=0.18.0-1
+ARG JQ_PACKAGE_VERSION=1.6-2.1
+ARG TINI_PACKAGE_VERSION=0.19.0-1
 ENV IPFS_PATH /ipfs-repo
 RUN apt-get update \
     && apt-get install --no-install-recommends --yes \
@@ -32,7 +32,8 @@ RUN apt-get update \
     && mv /tmp/go-ipfs/ipfs /usr/local/bin \
     && rm -r /tmp/go-ipfs \
     && find / -xdev -type f -perm /u+s -exec chmod --changes u-s {} \; \
-    && find / -xdev -type f -perm /g+s -exec chmod --changes g-s {} \;
+    && find / -xdev -type f -perm /g+s -exec chmod --changes g-s {} \; \
+    && ipfs --version
 
 ENV IPFS_CONFIG_PATH="${IPFS_PATH}/config" \
     IPFS_INIT_PROFILE=server \
