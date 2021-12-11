@@ -18,6 +18,8 @@ if [ "$IPFS_API_ADDR" != "default" ]; then
     ipfs_config_jq_edit '.Addresses.API = $ARGS.positional[0]' --args "$IPFS_API_ADDR"
 fi
 
+# compare `Addresses.AppendAnnounce (new in go-ipfs v0.11.0)
+# https://github.com/ipfs/go-ipfs/blob/v0.11.0/docs/config.md#addressesappendannounce
 if [ "$IPFS_SWARM_ADDRS" != "default" ]; then
     # + ipfs config --json Addresses.Swarm '["/ip4/0.0.0.0/tcp/4001"]'
     # Error: api not running
