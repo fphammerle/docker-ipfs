@@ -26,6 +26,7 @@ if [ "$IPFS_SWARM_ADDRS" != "default" ]; then
     ipfs_config_jq_edit '.Addresses.Swarm |= $ARGS.positional' --args $IPFS_SWARM_ADDRS
 fi
 
+# compare https://github.com/ipfs/go-ipfs/blob/v0.11.0/docs/config.md#peering
 if [ ! -z "$IPFS_BOOTSTRAP_ADD" ]; then
     # + ipfs bootstrap add -- /dnsaddr/...
     # Error: api not running
