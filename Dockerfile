@@ -19,7 +19,7 @@ RUN apt-get update \
     && chown ipfs $IPFS_PATH
 VOLUME $IPFS_PATH
 
-ARG IPFS_VERSION=0.11.0
+ARG IPFS_VERSION=0.12.0
 COPY ipfs-arch.sh /
 ARG INSTALL_DEPENDENCIES="wget ca-certificates"
 RUN apt-get update \
