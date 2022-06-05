@@ -29,7 +29,7 @@ docker run --name ipfs \
     fphammerle/ipfs:latest
 ```
 
-## Publish HTTP Gateway
+## Publish [HTTP Gateway](https://github.com/ipfs/go-ipfs/blob/v0.12.2/docs/config.md#addressesgateway)
 
 ```sh
 docker run -e IPFS_GATEWAY_ADDR=/ip4/0.0.0.0/tcp/8080 -p 8080:8080 …
