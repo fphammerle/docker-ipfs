@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- entrypoint: support changing gateway address & port via environment variable `IPFS_GATEWAY_ADDR`
+  (e.g. `IPFS_GATEWAY_ADDR=/ip4/0.0.0.0/tcp/8080` to listen on all ipv4 interfaces)
+
 ### Fixed
 - docker-compose: remove unsuppported option `volumes[].tmpfs.mode`
 

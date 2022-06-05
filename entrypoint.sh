@@ -26,6 +26,10 @@ if [ "$IPFS_SWARM_ADDRS" != "default" ]; then
     ipfs_config_jq_edit '.Addresses.Swarm |= $ARGS.positional' --args $IPFS_SWARM_ADDRS
 fi
 
+if [ "$IPFS_GATEWAY_ADDR" != "default" ]; then
+    ipfs_config_jq_edit '.Addresses.Gateway = $ARGS.positional[0]' --args "$IPFS_GATEWAY_ADDR"
+fi
+
 # compare https://github.com/ipfs/go-ipfs/blob/v0.11.0/docs/config.md#peering
 if [ ! -z "$IPFS_BOOTSTRAP_ADD" ]; then
     # + ipfs bootstrap add -- /dnsaddr/...

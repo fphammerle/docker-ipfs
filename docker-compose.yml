@@ -5,9 +5,11 @@ volumes:
 
 services:
   ipfs:
+    container_name: ipfs
     build: .
     image: docker.io/fphammerle/ipfs
-    container_name: ipfs
+    #environment:
+    #  IPFS_GATEWAY_ADDR: /ip4/0.0.0.0/tcp/8080
     read_only: true
     volumes:
     - type: volume
@@ -22,6 +24,7 @@ services:
     ports:
     - '4001:4001'
     - '127.0.0.1:5001:5001'
+    #- '127.0.0.1:8080:8080' # requires IPFS_GATEWAY_ADDR=/ip4/0.0.0.0/tcp/8080
     cap_drop: [ALL]
     security_opt: [no-new-privileges]
     restart: unless-stopped

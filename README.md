@@ -29,6 +29,12 @@ docker run --name ipfs \
     fphammerle/ipfs:latest
 ```
 
+## Publish HTTP Gateway
+
+```sh
+docker run -e IPFS_GATEWAY_ADDR=/ip4/0.0.0.0/tcp/8080 -p 8080:8080 …
+```
+
 ## Change [Swarm Listener Ports](https://github.com/ipfs/go-ipfs/blob/v0.8.0/docs/config.md#addressesswarm)
 
 ```sh
