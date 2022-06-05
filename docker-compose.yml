@@ -18,7 +18,6 @@ services:
       target: /tmp # entrypoint.sh
       tmpfs:
         # nosuid,nodev,noexec added by default
-        mode: '1777'
         size: 16k # default config has approx 5kB
     ports:
     - '4001:4001'
