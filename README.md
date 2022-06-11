@@ -2,6 +2,11 @@
 
 golang-implementation of the [interplanetary file system (ipfs)](https://ipfs.io/) daemon
 
+__DEPRECATED__ since the [official image](https://web.archive.org/web/20220611212303/https://github.com/ipfs/go-ipfs/blob/v0.13.0/Dockerfile)
+now supports configuration via [/container-init.d](https://web.archive.org/web/20220611212212/https://github.com/ipfs/go-ipfs/pull/6577)
+([docs](https://web.archive.org/web/20220611212603/https://docs.ipfs.io/how-to/run-ipfs-inside-docker/#customizing-your-node),
+[commit](https://github.com/ipfs/go-ipfs/commit/63b00256642c6ddcb35eecd95ea4e23a6bba21f3))
+
 docker hub: https://hub.docker.com/r/fphammerle/ipfs/
 
 signed docker image digests: https://github.com/fphammerle/docker-ipfs/tags
